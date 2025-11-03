@@ -18,13 +18,25 @@
   </head>
 
   <body id="topo">
-  <nav class="top-categories">
+<nav class="top-categories">
   <a href="#topo"><img src="imagens/prato rapido.png" alt="Logo Prato Rápido" class="logo" /></a>
   <a href="#executivos">Executivos</a>
   <a href="#hamburgueres">Hambúrgueres</a>
   <a href="#sucos">Sucos</a>
   <a href="#sobremesas">Sobremesas</a>
+
+  <!-- Campo de busca (fica no canto direito da barra preta) -->
+  <div class="search-bar">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Buscar prato..."
+    />
+  </div>
 </nav>
+
+
+
     <header>
       <img src="imagens/banner prato.png" alt="Banner Pizzaria Prato Rápido" />
     </header>
@@ -497,18 +509,57 @@
     <footer>
       <p>Prato Rápido © 2025 | Tele: (46) 99928-5045</p>
     </footer>
-    <script>
-      const buttons = document.querySelectorAll(".menu-btn");
-      buttons.forEach((btn) => {
-        btn.addEventListener("mouseover", () => {
-          btn.style.transform = "scale(1.08)";
-        });
-        btn.addEventListener("mouseout", () => {
-          btn.style.transform = "scale(1)";
-        });
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.menu-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('mouseover', () => btn.style.transform = 'scale(1.08)');
+    btn.addEventListener('mouseout', () => btn.style.transform = 'scale(1)');
+  });
+
+  function filtrarCardapio() {
+    const input = document.getElementById('searchInput');
+    const query = input.value.trim().toLowerCase();
+    const sections = document.querySelectorAll('section.menu-grid');
+
+    sections.forEach(section => {
+      const cards = section.querySelectorAll('.menu-card');
+      let algumVisivel = false;
+
+      cards.forEach(card => {
+        const titulo = card.querySelector('h2')?.innerText.toLowerCase() || '';
+        const descricao = card.querySelector('p')?.innerText.toLowerCase() || '';
+
+        if (!query || titulo.includes(query) || descricao.includes(query)) {
+          card.classList.remove('hidden');
+          algumVisivel = true;
+        } else {
+          card.classList.add('hidden');
+        }
       });
-    </script>
+
+      // Mostra ou esconde a seção e seu título
+      const tituloSecao = section.previousElementSibling;
+      if (algumVisivel) {
+        section.classList.remove('hidden');
+        if (tituloSecao?.tagName === 'H1') tituloSecao.classList.remove('hidden');
+      } else {
+        section.classList.add('hidden');
+        if (tituloSecao?.tagName === 'H1') tituloSecao.classList.add('hidden');
+      }
+    });
+  }
+
+  document.getElementById('searchInput').addEventListener('input', filtrarCardapio);
+});
+</script>
+
+
+
+
+
+
+    
   </body>
-
 </html>
-

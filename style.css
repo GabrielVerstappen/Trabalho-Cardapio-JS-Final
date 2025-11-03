@@ -52,20 +52,19 @@ h1 {
 
 /* Card do prato */
 .menu-card {
-    background: linear-gradient(145deg, #1a1a1a, #121212);
-    border-radius: 20px;
-    box-shadow: 0 12px 30px rgba(0, 255, 127, 0.05);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #222;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  background: linear-gradient(145deg, #1a1a1a, #121212);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 255, 127, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #222;
+  display: block;              /* ✅ muda de flex para block */
+  width: 100%;
 }
 
 .menu-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 16px 40px #f1aa22;
+  transform: translateY(-10px);
+  box-shadow: 0 16px 40px #f1aa22;
 }
 
 /* Imagem do prato */
@@ -148,10 +147,10 @@ footer {
 /* barra */
 .top-categories {
   background: #000;
-  padding: 12px 40px;
+  padding: 0 40px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border-bottom: 3px solid #f1aa22;
   height: 65px;
   position: fixed;
@@ -159,14 +158,13 @@ footer {
   left: 0;
   width: 100%;
   z-index: 1000;
+  gap: 30px;
 }
 
 .top-categories .logo {
-  height: 80px;
-  position: absolute;
-  left: 30px;
-  top: 50%;
-  transform: translateY(-50%);
+  height: 50px;
+  flex-shrink: 0;
+  position: static; /* remove o absolute */
 }
 
 .top-categories a {
@@ -174,7 +172,7 @@ footer {
   font-size: 18px;
   font-weight: 700;
   text-decoration: none;
-  margin: 0 18px;
+  margin: 0 10px;
   transition: 0.2s;
 }
 
@@ -183,6 +181,62 @@ footer {
   text-shadow: 0 0 6px #f1aa22;
 }
 
+
 header {
   margin-top: 65px;
+}
+
+/* Campo de busca dentro da barra preta */
+/* Barra de busca dentro do menu */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.search-bar input {
+  width: 180px; /* diminui a largura */
+  max-width: 250px; /* limite máximo */
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 2px solid #f1aa22;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.9em;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px #f1aa22;
+}
+
+
+/* Ajuste para não cobrir o conteúdo */
+header {
+  margin-top: 80px;
+}
+
+
+/* Corrige distorção dos cards */
+.menu-grid .menu-card {
+  display: block; /* garante layout fixo no grid */
+  width: 100%;
+}
+
+/* ==== Correção final para distorção e busca ==== */
+
+/* impede os cards de expandirem dentro do grid */
+.menu-card {
+  align-items: flex-start;
+  height: auto;
+}
+
+/* classe para esconder sem quebrar o grid */
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }

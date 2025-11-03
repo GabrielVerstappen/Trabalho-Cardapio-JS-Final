@@ -1,4 +1,4 @@
-/* Estilo global a*/
+/* Estilo global */
 * {
     box-sizing: border-box;
 }
@@ -240,4 +240,3 @@ header {
   opacity: 0;
   pointer-events: none;
 }
-
